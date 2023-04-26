@@ -36,17 +36,21 @@ public class IndexController {
 
       statement = connection.createStatement();
       String query = null;
+      int indx=1;
 
       if (bookname != null) {
         // Filter by book name
-        query = "SELECT * FROM Books WHERE name LIKE '%" + bookname + "%'";
+        query = "SELECT * FROM Books WHERE name LIKE ?;
+        statement.setString(indx++,bookname);
       } else if (bookauthor != null) {
         // Filter by book author
-        query = "SELECT * FROM Books WHERE author LIKE '%" + bookauthor + "%'";
+        query = "SELECT * FROM Books WHERE author LIKE ?";
+        statement.setString(indx++,bookauthor);
       } else if (bookread != null) {
         // Filter by if the book has been read or not
         Integer read = bookread ? 1 : 0;
-        query = "SELECT * FROM Books WHERE read = '" + read.toString() + "'";
+        query = "SELECT * FROM Books WHERE read = ?";
+        statement.setString(indx++,bookread);
       } else {
         // All books
         query = "SELECT * FROM Books";
