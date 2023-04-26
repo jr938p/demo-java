@@ -51,7 +51,7 @@ public class IndexController {
         statement.setString(indx++,bookauthor);
       } else if (bookread != null) {
         // Filter by if the book has been read or not
-        Integer read = bookread ? 1 : 0;
+        //Integer read = bookread ? 1 : 0;
         query = "SELECT * FROM Books WHERE read = ?";
         statement = connection.prepareStatement(query);
         statement.setBoolean(indx, bookread);
